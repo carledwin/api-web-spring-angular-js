@@ -1,16 +1,8 @@
 package com.carledwin.ti.apiwebspringangularjs.ws.service;
 
-import java.util.Collection;
-
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.carledwin.ti.apiwebspringangularjs.ws.model.Cliente;
 
-@Component
-public interface Clientes {
-	Cliente cadastrar(Cliente cliente);	
-	void alterar(Cliente cliente);
-	Collection<Cliente> buscarTodos();
-	void excluir(Long id);
-	Cliente buscarPorId(Long id);
+public interface Clientes extends JpaRepository<Cliente, Long> {
 }

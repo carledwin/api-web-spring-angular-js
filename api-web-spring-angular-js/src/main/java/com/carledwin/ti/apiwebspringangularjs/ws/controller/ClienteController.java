@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.carledwin.ti.apiwebspringangularjs.ws.model.Cliente;
-import com.carledwin.ti.apiwebspringangularjs.ws.service.Clientes;
+import com.carledwin.ti.apiwebspringangularjs.ws.service.ClienteService;
 
 @RestController
 public class ClienteController {
 
 	@Autowired
-	private Clientes clientes;
+	private ClienteService clientesService;
 	
 	// end points
 	@RequestMapping(method = RequestMethod.POST, value = "/clientes", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Cliente> cadastrarCliente(@RequestBody Cliente cliente) {
-		clientes.cadastrar(cliente);
+		clientesService.cadastrar(cliente);
 		System.out.println("Chamou POST - /clientes");
 		System.out.println("Id: " + cliente.getId() + " Cliente: " + cliente.getNome());
 		System.out.println("Cliente cadastrado com sucesso!");
@@ -35,13 +35,13 @@ public class ClienteController {
 	@RequestMapping(method = RequestMethod.PUT, value = "/clientes", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Cliente> alterarCliente(@RequestBody Cliente cliente) {
 		
-		Cliente clienteAlteracao = clientes.buscarPorId(cliente.getId());
+		Cliente clienteAlteracao = clientesService.buscarPorId(cliente.getId());
 		
 		if(null == clienteAlteracao){
 			System.out.println("Cliente nao encontrado.");
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		clientes.alterar(cliente);
+		clientesService.alterar(cliente);
 		System.out.println("Chamou PUT- /clientes");
 		System.out.println("Id: " + cliente.getId() + " Cliente: " + cliente.getNome());
 		System.out.println("Cliente alterado com sucesso!");
@@ -51,7 +51,7 @@ public class ClienteController {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/clientes", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Collection<Cliente>> buscarTodosCliente() {
-		Collection<Cliente> todosClientes = clientes.buscarTodos();
+		Collection<Cliente> todosClientes = clientesService.buscarTodos();
 		System.out.println("Chamou GET - /clientes");
 		System.out.println("Busca todos realizada com sucesso!");
 
@@ -64,14 +64,14 @@ public class ClienteController {
 		
 		System.out.println("Buscando cliente...");
 		
-		Cliente cliente = clientes.buscarPorId(id);
+		Cliente cliente = clientesService.buscarPorId(id);
 		
 		if(null == cliente){
 			System.out.println("Cliente nao encontrado.");
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		
-		clientes.excluir(cliente.getId());
+		clientesService.excluir(cliente.getId());
 		
 		System.out.println("Remocao realizada com sucesso!");
 
