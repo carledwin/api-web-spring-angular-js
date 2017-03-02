@@ -5,12 +5,15 @@
 	<script type="text/javascript" src="js/revisao.js"></script>
 </head>
 <body>
-<font id="formCadastro">
+<form id="formCadastro">
 	<div id="campos">
 		<input type="text" name="txt_nome" id="nome" />
+	</div>	
+	<div id="botoes">	
 		<input type="button" value="+" onclick="adicionarNovoContato()" />
 		<input type="button" value="Exibir Nome" onclick="exibirNome()" />
 		<input type="button" value="Salvar" onclick="salvar()" />
+		<input type="button" value="Imprimir Dados" onclick="imprimirDados()" />
 	</div>
 
 	<div id="display">
@@ -24,7 +27,7 @@
 
 	<div id="listaContatos">
 	</div>
-</font>
+</form>
 
 	<div id="resultado">
 
