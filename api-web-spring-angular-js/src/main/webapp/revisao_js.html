@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Revisão Javascript</title>
+	<script type="text/javascript">
+
+	countContato = 0;
+
+		function exibirNome(){
+			//variavel local
+			var x= 10;
+			z = "tudo bem";
+		/*variaveis globais
+			x = 10;
+			x="Texto";
+			x={"Objeto"};
+			x=["vetor"];
+		*/
+
+		var elNome = document.getElementById("nome");
+		//document.write(el_nome.value);
+		
+		var elDisplay = document.getElementById("display");
+		elDisplay.innerText =  elNome.value;
+
+		/*
+		var elDisplay2 = document.getElementById("display2");
+		elDisplay2.innerHTML = "<p style = 'color:red'>" + elDisplay.innerText + "</p>";
+
+		console.log(elDisplay2);
+		console.log(elNome.value);
+		*/
+
+		}
+
+		function adicionarNovoContato(){
+
+			var elListaContatos = document.getElementById("listaContatos");
+			var labelContato = document.createElement("label")
+			var inputContato = document.createElement("input");
+			var brContato = document.createElement("br");
+			var inputButton = document.createElement("input");
+			countContato ++;
+
+			labelContato.innerText = "Contato " + countContato + ": ";
+			inputButton.setAttribute("type","button");
+			inputButton.setAttribute("value", "-");
+			inputButton.setAttribute("onclick", "removerContato()");
+
+			elListaContatos.appendChild(labelContato);
+			elListaContatos.appendChild(inputContato);
+			elListaContatos.appendChild(inputButton);
+			elListaContatos.appendChild(brContato);
+		}
+
+		function removerContato(){
+			console.log("removido");
+		}
+
+		//load da pagina imprime o texto
+		//exibirNome();
+		//document.write("Oi " + z + "?");
+	</script>
+</head>
+<body>
+	<div id="campos">
+		<input type="text" name="txt_nome" id="nome" />
+		<input type="button" value="+" onclick="adicionarNovoContato()" />
+		<input type="button" value="OK" onclick="exibirNome()" />
+	</div>
+
+	<div id="display">
+		conteudo
+	</div>
+
+<!--
+	<div id="display2">
+	</div>
+-->
+
+	<div id="listaContatos">
+	</div>
+
+
+</body>
+</html>
