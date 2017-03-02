@@ -27,6 +27,21 @@ countContato = 0;
 
 		}
 
+		function salvar(){
+			var elFormCadastro = document.getElementById("formCadastro");
+			var elFormChildInputNome = elFormCadastro;
+			var elResultado = document.getElementById("resultado");
+			var elTituloResultado = document.createElement("h3");
+			var elNome2 = document.getElementById("nome");
+
+			elTituloResultado.innerText = elNome2.value;
+
+			elResultado.innerText = "";
+			
+			elResultado.appendChild(elTituloResultado);
+			
+		}
+
 		function adicionarNovoContato(){
 
 			var elListaContatos = document.getElementById("listaContatos");

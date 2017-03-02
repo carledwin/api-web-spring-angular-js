@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Revisão Javascript</title>
+	<title>Revisao Javascript</title>
 	<script type="text/javascript" src="js/revisao.js"></script>
 </head>
 <body>
+<font id="formCadastro">
 	<div id="campos">
 		<input type="text" name="txt_nome" id="nome" />
 		<input type="button" value="+" onclick="adicionarNovoContato()" />
-		<input type="button" value="OK" onclick="exibirNome()" />
+		<input type="button" value="Exibir Nome" onclick="exibirNome()" />
+		<input type="button" value="Salvar" onclick="salvar()" />
 	</div>
 
 	<div id="display">
@@ -21,6 +23,11 @@
 -->
 
 	<div id="listaContatos">
+	</div>
+</font>
+
+	<div id="resultado">
+
 	</div>
 
 
