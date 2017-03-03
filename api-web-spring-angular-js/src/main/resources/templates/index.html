@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1" />
+<title>Home</title>
+
+<script>
+//<![CDATA[
+	function carregarDados(){
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function(){
+					if(this.readyState == 4 && this.status == 200){
+							document.getElementById("display").innerHTML = this.responseText;
+						}
+				};
+
+			xhttp.open("GET", "http://localhost:8080/clientes", true);
+			xhttp.send();
+		}
+//]]>
+</script>
+</head>
+<body>
+
+<button onclick="carregarDados()">Carregar</button>
+
+<div id="display">
+
+</div>
+
+</body>
+</html>

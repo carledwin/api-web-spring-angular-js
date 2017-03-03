@@ -1,0 +1,37 @@
+<html>
+	<head>
+		
+	</head>
+	<body>
+	<div id="saida">
+	</div>
+	<script>
+			var pessoa = {nome: "Carl", idade:34, dizerOla:function(){
+																		window.alert("Pessoa nome: " + pessoa.nome + "   idade: " + pessoa.idade);
+															},
+										exibirMensagem:function(console,exibirNaDiv, mensagem,saida){
+												if(console){
+													saida(mensagem);
+												}else{
+													window.alert(mensagem.mensagem);
+												}
+
+												if(exibirNaDiv){
+													var elDiv = document.getElementById("saida");
+													elDiv.innerText = mensagem.mensagem;	
+												}	
+											}
+						};
+
+			console.log(pessoa.nome);
+			console.log(pessoa.idade);
+			pessoa.dizerOla();
+			var mensagem = {mensagem:"Bem vindo!"};
+			pessoa.exibirMensagem(false,true, mensagem, function(msg){
+															console.log("Mensagem de callback")
+														}
+								);
+			
+		</script>
+	</body>
+</html>

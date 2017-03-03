@@ -29,38 +29,41 @@ countContato = 0;
 
 		function imprimirDados(){
 			//var elementosForm = document.getElementById("formCadastro");	
-			var arrContatos = document.forms.formCadastro.txt_contato;
+			//var arrContatos = document.forms.formCadastro.txt_contato;
+			var arrContatos = document.forms[0].txt_contato;
 			var elResultado2 = document.getElementById("resultado");
 			var elBr = document.createElement("br");
 			var elH3Contato = document.createElement("h3");
 				
 				elResultado2.innerText = "";
+				elResultado2.appendChild(elH3Contato);
+				elResultado2.setAttribute("style", "border:solid 1px green; width:300px;");
+				elResultado2.setAttribute("border","1");
 				
 			if(arrContatos != null){
-				elH3Contato.setAttribute("style", "color:blue");
+				elH3Contato.setAttribute("style", "color:blue; text-align: center;");
 				elH3Contato.innerText = "Lista de contatos";
-
+				
 				for( indexContato=0; indexContato < arrContatos.length; indexContato++){
 					//window.alert("Contato: " + arrContatos[indexContato].value);
 					
-					var elNovoSpan = document.createElement("span");
-					
+					var elNovoP = document.createElement("p");
 					var elLabel2 = document.createElement("label");
 
 					elLabel2.innerText = arrContatos[indexContato].value;
-					elNovoSpan.appendChild(elLabel2);
+					elNovoP.appendChild(elLabel2);
+					elResultado2.appendChild(elNovoP);
 					elResultado2.appendChild(elBr);
-					elResultado2.appendChild(elNovoSpan);
-
 				} 
 
 			}else{
 					elH3Contato.setAttribute("style", "color:red");
 					elH3Contato.innerText = "Nenhum contato registrado.";
+					elResultado2.appendChild(elH3Contato);
 				}
 
-				elResultado2.appendChild(elH3Contato);
-				elH3Contato.appendChild(elBr);
+				
+				
 
 			
 		}
