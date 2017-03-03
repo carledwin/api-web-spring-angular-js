@@ -8,6 +8,11 @@ public class HomeController {
 
 	@RequestMapping("/home")
 	public String irParaHome(){
+		return "home";
+	}
+	
+	@RequestMapping("/index")
+	public String irParaIndex(){
 		return "index";
 	}
 }
