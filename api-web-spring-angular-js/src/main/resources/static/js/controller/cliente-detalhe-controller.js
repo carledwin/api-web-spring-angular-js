@@ -1,6 +1,6 @@
 appCliente.controller("clienteDetalheController", function($scope, $http, $route){
 	
-	$http.get("clientes/" +$route.current.params.id) 
+	$http.get("admin/clientes/" +$route.current.params.id) 
 			.then(function(response){
 			$scope.cliente = response.data;
 			console.log("Status: " + response.status);
@@ -8,6 +8,4 @@ appCliente.controller("clienteDetalheController", function($scope, $http, $route
 				function(response){
 				console.log("Status: " + response.status);
 				});
-	
-	
 	});

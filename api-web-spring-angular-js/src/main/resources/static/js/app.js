@@ -13,3 +13,7 @@ appCliente.config(function($routeProvider, $locationProvider){
 	$locationProvider.html5Mode(true);//para remover o # http://localhost:8080/#/clientes
 });
 
+appCliente.config(function($httpProvider){
+	$httpProvider.interceptors.push("tokenInterceptor");
+});
+
