@@ -18,12 +18,17 @@
 			<span ng-show="frmCliente.nome.$error.minlength">Campo nome deve ter pelo menos 3 caracteres.</span>
 			<span ng-show="frmCliente.nome.$error.maxlength">Campo nome deve ter no máximo 20 caracteres.</span>
 		</div>
-		<br />
 		<div>
 	 		<label>Email:  </label>
 			<input type="email" id="email" name="email" ng-model="cliente.email" required />
 			<span ng-show="frmCliente.email.$error.required && frmCliente.email.$dirty">Campo email é obrigatório.</span>
 			<span ng-show="frmCliente.email.$error.email">Campo email inválido.</span>
+		</div>
+		<div>
+	 		<label>UF:  </label>
+			<select ng-repeat="estado in estados">
+				<option value="{{estado.id}}">{{estado.uf}}</option>
+			</select>
 		</div>
 		<br />
 		
@@ -36,6 +41,21 @@
 		
 		<br />
 		<br />
+	</form>	
+
+		<br />
+		<br />
+		<table>
+			<tr ng-repeat="cliente in clientes">
+				<td>{{cliente.id}}</td>
+				<td>{{cliente.nome}}</td>
+				<td>{{cliente.email}}</td>
+				<td>{{cliente.estado.uf}}</td>
+				<td><button ng-click="deletarCliente(cliente)">Excluir</button></td>
+				<td><button ng-click="prepareAterarCliente(cliente)">Editar</button></td>
+				<td><a href="/clientes/{{cliente.id}}">Detalhe</button></td>
+			</tr>
+		</table>
 		
 		<fieldset>
 			<legend>Formulário</legend>
@@ -80,20 +100,7 @@
 			Error requerid and Dirty: {{frmCliente.email.$error.required && frmCliente.email.$dirty}}
 			
 		</fieldset>
-	</form>	
-
-		<br />
-		<br />
-		<table>
-			<tr ng-repeat="cliente in clientes">
-				<td>{{cliente.id}}</td>
-				<td>{{cliente.nome}}</td>
-				<td>{{cliente.email}}</td>
-				<td><button ng-click="deletarCliente(cliente)">Excluir</button></td>
-				<td><button ng-click="prepareAterarCliente(cliente)">Editar</button></td>
-				<td><a href="/clientes/{{cliente.id}}">Detalhe</button></td>
-			</tr>
-		</table>
+		
 		
 </div>
 </html>

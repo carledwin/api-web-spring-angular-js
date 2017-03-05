@@ -1,5 +1,10 @@
 <div>
 <br />
 <br />
-	Aqui vai a tela de estado
+	<table>
+		<tr ng-repeat="estado in estados">
+			<td>{{estado.id}}</td>
+			<td>{{estado.uf}}</td>
+		</tr>
+	</table>
 </div>
