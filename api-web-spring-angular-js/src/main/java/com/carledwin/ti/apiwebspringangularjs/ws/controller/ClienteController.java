@@ -16,6 +16,7 @@ import com.carledwin.ti.apiwebspringangularjs.ws.model.Cliente;
 import com.carledwin.ti.apiwebspringangularjs.ws.service.ClienteService;
 
 @RestController
+@RequestMapping(value="/admin")
 public class ClienteController {
 
 	@Autowired
