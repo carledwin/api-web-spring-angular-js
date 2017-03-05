@@ -25,10 +25,6 @@ public class ClienteController {
 	@RequestMapping(method = RequestMethod.POST, value = "/clientes", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Cliente> cadastrarCliente(@RequestBody Cliente cliente) {
 		clientesService.cadastrar(cliente);
-		System.out.println("Chamou POST - /clientes");
-		System.out.println("Id: " + cliente.getId() + " Cliente: " + cliente.getNome());
-		System.out.println("Cliente cadastrado com sucesso!");
-
 		return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);
 	}
 	
@@ -42,52 +38,30 @@ public class ClienteController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		clientesService.alterar(cliente);
-		System.out.println("Chamou PUT- /clientes");
-		System.out.println("Id: " + cliente.getId() + " Cliente: " + cliente.getNome());
-		System.out.println("Cliente alterado com sucesso!");
-
 		return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/clientes", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Collection<Cliente>> buscarTodosCliente() {
 		Collection<Cliente> todosClientes = clientesService.buscarTodos();
-		System.out.println("Chamou GET - /clientes");
-		System.out.println("Busca todos realizada com sucesso!");
-
 		return new ResponseEntity<>(todosClientes, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value = "/clientes/{id}")
 	public ResponseEntity<Cliente> removerCliente(@PathVariable Long id) {
-		System.out.println("Chamou DELETE - /clientes");
-		
-		System.out.println("Buscando cliente...");
-		
 		Cliente cliente = clientesService.buscarPorId(id);
-		
 		if(null == cliente){
 			System.out.println("Cliente nao encontrado.");
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		
 		clientesService.excluir(cliente.getId());
-		
-		System.out.println("Remocao realizada com sucesso!");
-
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/clientes/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Cliente> buscarClientePorId(@PathVariable Long id) {
-		System.out.println("Chamou BUSCAR POR ID - /clientes");
-		
-		System.out.println("Buscando cliente...");
-		
 		Cliente cliente = clientesService.buscarPorId(id);
-		
 		if(null == cliente){
-			System.out.println("Cliente nao encontrado.");
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(cliente, HttpStatus.OK);

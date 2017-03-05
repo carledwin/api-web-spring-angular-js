@@ -1,34 +1,99 @@
-<!-- <div ng-controller="cliente-controller"> -->
 <html>
 <head>
 	<meta charset="UTF-8" />
+	<style type="text/css">
+		fieldset{
+			display:inline;
+		}
+	</style>
 </head>
 <div>
-	
-	<label>Código</label>
-	<br />
-	<input type="text" ng-model="cliente.id" readonly="readonly" />
+	<form id="frmCliente" name="frmCliente" novalidate>
+		<label>Código: </label><input type="text" ng-model="cliente.id" ng-disabled="true" />
+		<br />
+		<div>
+	 		<label>Nome:  </label>
+			<input type="text" id="nome" name="nome" ng-minlength="3" ng-maxlength="20" ng-model="cliente.nome" required />
+			<span ng-show="frmCliente.nome.$error.required && frmCliente.nome.$dirty">Campo nome é obrigatório.</span>
+			<span ng-show="frmCliente.nome.$error.minlength">Campo nome deve ter pelo menos 3 caracteres.</span>
+			<span ng-show="frmCliente.nome.$error.maxlength">Campo nome deve ter no máximo 20 caracteres.</span>
+		</div>
+		<br />
+		<div>
+	 		<label>Email:  </label>
+			<input type="email" id="email" name="email" ng-model="cliente.email" required />
+			<span ng-show="frmCliente.email.$error.required && frmCliente.email.$dirty">Campo email é obrigatório.</span>
+			<span ng-show="frmCliente.email.$error.email">Campo email inválido.</span>
+		</div>
+		<br />
+		
+		<!-- <input type="button" ng-click="salvarCliente()" value="Salvar" ng-show="cliente.id == null" ng-disabled="frmCliente.$invalid" /> -->
+		<input type="button" ng-click="salvarCliente()" value="Salvar" ng-show="cliente.id == null" />
+		<!-- <input type="button" ng-click="alterarCliente(cliente)" ng-show="cliente.id != null" ng-disabled="frmCliente.$invalid" value="Alterar" /> -->
+		<input type="button" ng-click="alterarCliente(cliente)" ng-show="cliente.id != null" value="Alterar" />
+		<input type="button" ng-click="cancelarAlteracaoCliente()" ng-disabled="frmCliente.nome.$invalid" value="Cancelar" />
+		<input type="button" ng-click="limparCliente()" value="Limpar" />
+		
+		<br />
+		<br />
+		
+		<fieldset>
+			<legend>Formulário</legend>
+			Valid form: {{frmCliente.$valid}}
+		</fieldset>
+		<fieldset>
+			<legend>Campo nome</legend>
+			Valid field nome: {{frmCliente.nome.$valid}}
+			<br >
+			Invalid: {{frmCliente.nome.$invalid}}
+			<br />
+			Pristine: {{frmCliente.nome.$pristine}}
+			<br />
+			Dirty: {{frmCliente.nome.$dirty}}
+			<br />
+			Touched: {{frmCliente.nome.$touched}}
+			<br />
+			Error requerid: {{frmCliente.nome.$error.required}}
+			<br />
+			Error requerid and Dirty: {{frmCliente.nome.$error.required && frmCliente.nome.$dirty}}
+			<br />
+			Error MinLength: {{frmCliente.nome.$error.minlength}}
+			<br />
+			Error MaxLength: {{frmCliente.nome.$error.maxlength}}
+		</fieldset>
+		<fieldset>
+			<legend>Email</legend>
+			Valid field email: {{frmCliente.email.$valid}}
+			<br >
+			Invalid: {{frmCliente.email.$invalid}}
+			<br >
+			Type Invalid: {{frmCliente.email.$error.email}}
+			<br />
+			Pristine: {{frmCliente.email.$pristine}}
+			<br />
+			Dirty: {{frmCliente.email.$dirty}}
+			<br />
+			Touched: {{frmCliente.email.$touched}}
+			<br />
+			Error requerid: {{frmCliente.email.$error.required}}
+			<br />
+			Error requerid and Dirty: {{frmCliente.email.$error.required && frmCliente.email.$dirty}}
+			
+		</fieldset>
+	</form>	
 
-	<br />
-	<label>Nome</label>
-	<br />
-	<input type="text" ng-model="cliente.nome" />
-	
-	<input type="button" ng-click="salvarCliente()" value="Salvar" />
-	<input type="button" ng-click="alterarCliente(cliente)" value="Alterar" />
-	<input type="button" ng-click="cancelarAlteracaoCliente()" value="Cancelar" />
-	<input type="button" ng-click="limparCliente()" value="Limpar" />
-	<br />
-	<br />
-	<table>
-		<tr ng-repeat="cliente in clientes">
-			<td>{{cliente.id}}</td>
-			<td>{{cliente.nome}}</td>
-			<td><button ng-click="deletarCliente(cliente)">Excluir</button></td>
-			<td><button ng-click="prepareAterarCliente(cliente)">Editar</button></td>
-			<td><a href="/clientes/{{cliente.id}}">Detalhe</button></td>
-		</tr>
-	</table>
-	
+		<br />
+		<br />
+		<table>
+			<tr ng-repeat="cliente in clientes">
+				<td>{{cliente.id}}</td>
+				<td>{{cliente.nome}}</td>
+				<td>{{cliente.email}}</td>
+				<td><button ng-click="deletarCliente(cliente)">Excluir</button></td>
+				<td><button ng-click="prepareAterarCliente(cliente)">Editar</button></td>
+				<td><a href="/clientes/{{cliente.id}}">Detalhe</button></td>
+			</tr>
+		</table>
+		
 </div>
 </html>

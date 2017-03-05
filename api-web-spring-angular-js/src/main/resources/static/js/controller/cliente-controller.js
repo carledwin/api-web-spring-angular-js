@@ -1,18 +1,13 @@
 //recording controller
 appCliente.controller("clienteController", function($scope, $http){
-	
-	//$scope.nome = "Carl Edwin Antonio";
-	//$scope.sobrenome ="Nascimento";
 	$scope.clientes=[];
 	$scope.cliente = {};
 	$scope.carregarClientes = function(){
 		$http({method:"GET", url:"http://localhost:8080/clientes"})
 			.then(function(response){
 				$scope.clientes=response.data;
-				//console.log("Data: " + response.data + " Status: " + response.status);
 				console.log("Status: " + response.status);
 				}, function(response){
-					//console.log("Data: " + response.data + " Status: " + response.status);
 					console.log("Status: " + response.status);
 					});
 	};
@@ -20,15 +15,20 @@ appCliente.controller("clienteController", function($scope, $http){
 	$scope.carregarClientes();
 	
 	$scope.salvarCliente = function(){
+		
+		if($scope.frmCliente.$valid){
 		$http({method:"POST", url:"http://localhost:8080/clientes", data:$scope.cliente})
 			.then(function(response){
-				//$scope.carregarClientes();
 				$scope.clientes.push(response.data)
 				$scope.cliente = {};
 				console.log("Status: " + response.status);
 				}, function(response){
 					console.log("Status: " + response.status);
 					});
+		$scope.frmCliente.$setPristine(true);
+	}else{
+		window.alert("Dados inválidos!");
+	}
 	};
 	
 	$scope.deletarCliente = function(cliente){
@@ -52,20 +52,24 @@ appCliente.controller("clienteController", function($scope, $http){
 	};
 	
 	$scope.prepareAterarCliente = function(cliente){
-		//$scope.cliente = cliente;
 		$scope.cliente = angular.copy(cliente);
 	};
 	
 	$scope.alterarCliente = function(cliente){
-		$http({method:"PUT", url:"http://localhost:8080/clientes", data:$scope.cliente})
-			.then(function(response){
-				//$scope.clientes[$scope.clientes.indexOf(cliente)] = $scope.cliente;
-				$scope.carregarClientes();
-				$scope.cliente = {};
-				console.log("Status: " + response.status);
-			}, function(response){
-				console.log("Status: " + response.status);
-				});
+		
+		if($scope.frmCliente.$valid){
+			$http({method:"PUT", url:"http://localhost:8080/clientes", data:$scope.cliente})
+				.then(function(response){
+					$scope.carregarClientes();
+					$scope.cliente = {};
+					console.log("Status: " + response.status);
+				}, function(response){
+					console.log("Status: " + response.status);
+					});
+			$scope.frmCliente.$setPristine(true);
+		}else{
+			window.alert("Dados inválidos!");
+		}
 	};
 	
 	$scope.limparCliente = function(){
@@ -73,7 +77,6 @@ appCliente.controller("clienteController", function($scope, $http){
 	}
 	
 	$scope.cancelarAlteracaoCliente = function(){
-		//$scope.carregarClientes();
 		$scope.limparCliente();
 	}
 });
