@@ -78,4 +78,19 @@ public class ClienteController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "/clientes/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Cliente> buscarClientePorId(@PathVariable Long id) {
+		System.out.println("Chamou BUSCAR POR ID - /clientes");
+		
+		System.out.println("Buscando cliente...");
+		
+		Cliente cliente = clientesService.buscarPorId(id);
+		
+		if(null == cliente){
+			System.out.println("Cliente nao encontrado.");
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(cliente, HttpStatus.OK);
+	}
+
 }
