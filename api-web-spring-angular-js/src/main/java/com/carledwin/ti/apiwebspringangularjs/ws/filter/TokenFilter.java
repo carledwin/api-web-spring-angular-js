@@ -21,7 +21,7 @@ public class TokenFilter extends GenericFilterBean{
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		
-		String header = req.getHeader("Autorization");
+		String header = req.getHeader("Authorization");
 		
 		if(header == null || !header.startsWith("Bearer ")){
 			throw new ServletException("Token inexistente ou inválido.");

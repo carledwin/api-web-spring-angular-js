@@ -51,7 +51,7 @@ public class LoginController {
 				.setSubject(usuario.getNome())
 				.signWith(SignatureAlgorithm.HS512, "banana")
 				.claim("ROLE_ADMIN", "Cliente")
-				.setExpiration(new Date(System.currentTimeMillis() + 1*60*1000))
+				.setExpiration(new Date(System.currentTimeMillis() + 5*60*1000))
 				.compact();
 	}
 	
